@@ -9,7 +9,6 @@
 - **Real-time Kitchen Dashboard** - Live order updates for kitchen staff
 - **Admin Panel** - Manage menu items, categories, tables, and orders
 - **Payment Tracking** - Mark orders as paid (Cash/UPI)
-- **Order Cancellation** - 2-minute cancellation window for customers
 - **Soft Delete** - Recoverable deletion for menu items, categories, and tables
 - **Responsive Design** - Works on desktop, tablet, and mobile
 
