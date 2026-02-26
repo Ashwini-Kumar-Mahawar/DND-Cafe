@@ -962,20 +962,21 @@ body {
     align-items: center;
     justify-content: center;
     margin: 0 auto 10px;
-    font-size: 1.1rem;
     transition: all 0.3s;
 }
 
-.status-step.active .status-icon,
-.status-step.completed .status-icon {
-    background: var(--gold);
-    border-color: var(--gold);
-    transform: scale(1.1);
+.status-icon svg {
+    width: 20px;
+    height: 20px;
+    stroke: #b0927a;
 }
 
-.status-step.completed .status-icon {
-    background: var(--maroon);
-    border-color: var(--maroon);
+.status-step.active .status-icon svg {
+    stroke: var(--maroon);
+}
+
+.status-step.completed .status-icon svg {
+    stroke: var(--gold-lt);
 }
 
 .status-label {
@@ -1005,8 +1006,15 @@ body {
 }
 
 .current-status .status-emoji {
-    font-size: 2rem;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: center;
+}
+
+.current-status .status-emoji svg {
+    width: 48px;
+    height: 48px;
+    stroke: var(--gold-lt);
 }
 
 .current-status .status-text {

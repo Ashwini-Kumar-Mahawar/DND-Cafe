@@ -153,7 +153,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
 // -------------------------------------------------------
 // KITCHEN ROUTES (Protected — Kitchen Staff Login)
 // -------------------------------------------------------
-Route::prefix('kitchen')->name('kitchen.')->middleware(['auth', 'role:kitchen'])->group(function () {
+Route::prefix('kitchen')->name('kitchen.')->middleware(['auth', 'role:admin|kitchen'])->group(function () {
     Route::get('/',  [KitchenController::class, 'index'])->name('dashboard');
     Route::patch('/orders/{order}/status', [KitchenController::class, 'updateStatus'])->name('orders.status');
 });

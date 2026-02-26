@@ -50,42 +50,84 @@
                         $currentIndex = array_search($order->status, $statuses);
                     @endphp
 
-                    @foreach(['pending' => '📋', 'confirmed' => '✓', 'preparing' => '👨‍🍳', 'ready' => '🔔', 'delivered' => '✨'] as $status => $emoji)
+                    @foreach(['pending', 'confirmed', 'preparing', 'ready', 'delivered'] as $status)
                         @php
                             $statusIndex = array_search($status, $statuses);
                             $isCompleted = $statusIndex < $currentIndex;
                             $isActive = $status === $order->status;
                         @endphp
                         <div class="status-step {{ $isActive ? 'active' : '' }} {{ $isCompleted ? 'completed' : '' }}">
-                            <div class="status-icon">{{ $emoji }}</div>
+                            <div class="status-icon">
+                                @if($status === 'pending')
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                        <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                                    </svg>
+                                @elseif($status === 'confirmed')
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                @elseif($status === 'preparing')
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                        <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                                    </svg>
+                                @elseif($status === 'ready')
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                        <path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                                    </svg>
+                                @elseif($status === 'delivered')
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                        <path d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                @endif
+                            </div>
                             <div class="status-label">{{ ucfirst($status) }}</div>
                         </div>
-                    @endforeach
+                    @endforeach                
                 </div>
 
                 <div class="current-status">
                     @if($order->status === 'pending')
-                        <div class="status-emoji">📋</div>
+                        <div class="status-emoji">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                            </svg>
+                        </div>
                         <div class="status-text">Order Received!</div>
                         <div class="status-subtext">We've got your order and the kitchen will confirm it shortly.</div>
                     @elseif($order->status === 'confirmed')
-                        <div class="status-emoji">✓</div>
+                        <div class="status-emoji">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
                         <div class="status-text">Order Confirmed!</div>
                         <div class="status-subtext">Kitchen has confirmed your order and will start preparing soon.</div>
                     @elseif($order->status === 'preparing')
-                        <div class="status-emoji">👨‍🍳</div>
+                        <div class="status-emoji">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                            </svg>
+                        </div>
                         <div class="status-text">Preparing Your Food</div>
                         <div class="status-subtext">Your delicious food is being prepared right now!</div>
                     @elseif($order->status === 'ready')
-                        <div class="status-emoji">🔔</div>
+                        <div class="status-emoji">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                            </svg>
+                        </div>
                         <div class="status-text">Order Ready!</div>
                         <div class="status-subtext">Your order is ready and will be delivered to your table shortly.</div>
                     @elseif($order->status === 'delivered')
-                        <div class="status-emoji">✨</div>
+                        <div class="status-emoji">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 13l4 4L19 7"/>
+                            </svg>
+                        </div>
                         <div class="status-text">Order Delivered!</div>
                         <div class="status-subtext">Enjoy your meal! Thank you for dining with us.</div>
                     @endif
-                </div>
+                </div>            
             </div>
         @endif
 
@@ -145,7 +187,7 @@
         @if(!in_array($order->status, ['delivered', 'cancelled']))
             <div class="refresh-indicator">
                 <span class="spinner"></span>
-                This page refreshes automatically every 20 seconds
+                This page refreshes automatically every 10 seconds
             </div>
         @endif
 
@@ -155,8 +197,8 @@
 @if(!in_array($order->status, ['delivered', 'cancelled']))
     @push('scripts')
     <script>
-        // Auto-refresh every 20 seconds
-        setTimeout(() => location.reload(), 20000);
+        // Auto-refresh every 10 seconds
+        setTimeout(() => location.reload(), 10000);
     </script>
     @endpush
 @endif
