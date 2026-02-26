@@ -21,7 +21,7 @@
 - **Assets:** Vite
 
 ## 📸 Screenshots
-<img width="1920" height="5790" alt="DND Cafe (1)" src="https://github.com/user-attachments/assets/f81768be-2510-4f7b-be2e-780ee8fd8ecc" />
+<img width="1600" height="4655" alt="DND Cafe (1)" src="https://github.com/user-attachments/assets/bbe4b5e3-3865-4444-a0dd-689dac0bc3fb" />
 
 
 ## 🚀 Installation
